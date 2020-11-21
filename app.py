@@ -13,20 +13,6 @@ from flask import (
 #################################################
 app = Flask(__name__)
 
-#################################################
-# Database Setup
-#################################################
-
-from flask_sqlalchemy import SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', '') or "sqlite:///db.sqlite"
-
-# Remove tracking modifications
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-Pet = create_classes(db)
-
 # create route that renders index.html template
 @app.route("/")
 def home():
@@ -34,19 +20,10 @@ def home():
 
 
 # Query the database and send the jsonified results
-@app.route("/send", methods=["GET", "POST"])
-def send():
-    if request.method == "POST":
-        name = request.form["petName"]
-        lat = request.form["petLat"]
-        lon = request.form["petLon"]
+@app.route("/graph")
+def graph():
 
-        pet = Pet(name=name, lat=lat, lon=lon)
-        db.session.add(pet)
-        db.session.commit()
-        return redirect("/", code=302)
-
-    return render_template("form.html")
+    return render_template("graph.html")
 
 
 @app.route("/api/pals")
