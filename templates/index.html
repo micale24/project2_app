@@ -1,39 +1,122 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Pet Pals!</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Crash Data</title>
+  <!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
+  <!-- <link rel="stylesheet" type="text/css" href="style1.css"> -->
+  <link rel="shortcut icon" type="image/png" href="./Visualizations/bus-15-16-260672.png">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
+<style>
+  .navbar a:hover,
+  .dropdown:hover .dropbtn,
+  .dropbtn:focus {
+    background-color: lightgray;
+  }
+  body {
+    background: #D3D3D3;
+    margin: 0px 0px 10px 0px;
+    padding: 0px 0px 10px 0px;
+  }
+
+  .fakeimg {
+    background-color: white;
+    padding: 20px;
+  }
+  #navbarDropdownMenuLink {
+    color: black;
+  }
+
+  .nav-link {
+    color: black;
+  }
+
+  .visImages {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  h1{
+    color: lightseagreen;
+    text-align: center;
+  }
+  #description-image {
+  float: left;
+  width: auto;
+  height: 200px;
+}
+</style>
 
 <body>
-    <div class="container">
-        <div class="jumbotron" style="text-align: center">
-            <h1>Pet Pal</h1>
-            <p>Find your pet a pal!</p>
-        </div>
+  <nav class="navbar navbar-expand-sm bg-white navbar-black">
+    <a class="navbar-brand" href="index.html">
+      <img src="./Visualizations/crashB.png" alt="logo" style="width:500px;"></a>
 
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Look at all of the current pet pals!</h2>
-                <div id="plot"></div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <h2><a href="/send">Add your pet here!</a></h2>
-            </div>
-        </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Plots
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#;">Need something</a>
+            <a class="dropdown-item" href="https://data.montgomerycountymd.gov/api/views/bhju-22kf/rows.json?accessType=DOWNLOAD"> My JSON</a>
+          </div>
+        </li>
+        <li class="nav-item" id="link2">
+          <a class="dropdown-item" href="https://data.montgomerycountymd.gov/Public-Safety/Crash-Reporting-Incidents-Data/bhju-22kf/data"> Data</a>
+        </li>
+      </ul>
     </div>
+  </nav>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <div class="container" style="margin-top:30px">
+    <div class="row">
+      <div class="col-md-7">
+        <section class="fakeimg">
+          <h1> About The Data</h1>
+          <hr>
+          <section id="description-image">
+            <img id="description-image" src="./Visualizations/crashB.png" alt="should be pic">
+          </section>
+          <p>The purpose of this visualize car crashes in my local area.  As a daily commuter to Washington, D.C., I was curious
+            the number of car crashes because I see at least one once a week</p>
+          <p>This dataset provides general information about each collision and details of all traffic collisions occurring on county and local roadways within Montgomery County, as collected via the Automated Crash Reporting System (ACRS) of the Maryland State Police, and reported by the Montgomery County Police, Gaithersburg Police, Rockville Police, or the Maryland-National Capital Park Police.\r\n\r\n
+            Please note that these collision reports are based on preliminary information supplied to the Police Department by the reporting parties. Therefore, the collision data available on this web page may reflect:\r\n \r\n-Information not yet verified by further investigation\r\n-Information that may include verified and unverified collision data\r\n-Preliminary collision classifications may be changed at a later date based upon further investigation\r.</p>
+        </section>
+      </div>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+      <div class="col-md-3">
+        <div class="fakeimg">
+          <h1 class="visuals">Are We Safe?</h1>
+          <hr>
+          <div class="visImages">
+            <a class="maxtemp" href="comparisons.html">
+              <img src="./Visualizations/scatter1.png" alt="max temp" style="width:160px;"></a>
+              <p>
+                Car crashes are so frequent in our daily travel and entertainment I believe we have become accustomed to the trauma.
+              </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  
 </body>
-
 </html>
