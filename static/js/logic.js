@@ -15,7 +15,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // Store API query variables
-var baseURL = "https://data.montgomerycountymd.gov/api/views/bhju-22kf/rows.json?accessType=DOWNLOAD";
+var baseURL = "https://data.montgomerycountymd.gov/resource/bhju-22kf.json";
 // var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
 // var complaint = "&complaint_type=Rodent";
 // var limit = "&$limit=10000";
@@ -34,15 +34,15 @@ d3.json(url, function(response) {
   for (var i = 0; i < response.length; i++) {
 
     // Set the data location property to a variable
-    var location = response[i].data;
-    ploc =["parkeerlocaties"][x]["parkeerlocatie"]["Locatie"]["coordinates"];
+    // var location = response[i].data;
+    var location = response["geolocation"];
 
     // Check for location property
     if (location) {
 
       // Add a new marker to the cluster group and bind a pop-up
-      markers.addLayer(L.marker([location.coordinates[1], location.coordinates[0]])
-        .bindPopup(response[i].descriptor));
+      markers.addLayer(L.marker([location.latitude, location.longitude)
+        .bindPopup(response[i]).agency_name);
     }
 
   }
