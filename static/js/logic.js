@@ -2,7 +2,6 @@
 
 // Creating map object
 var myMap = L.map("map", {
-  // center: [40.7, -73.95],
   center: [39.15, -77.24],
   zoom: 11
 });
@@ -19,9 +18,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 // Store API query variables
 var baseURL = "https://data.montgomerycountymd.gov/resource/bhju-22kf.json";
-// var date = "$where=created_date between'2016-01-01T00:00:00' and '2017-01-01T00:00:00'";
-// var complaint = "&complaint_type=Rodent";
-// var limit = "&$limit=10000";
+
 
 // Assemble API query URL
 var url = baseURL 
